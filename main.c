@@ -1,12 +1,3 @@
-/*
- *
- * KNOWN BUGS:
- *      crashing after swapping between different commands
- *      needing to repeat "-play <SONG>" if you let the song playout w/ doing -stop
- *      ...
- *
- * */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -169,9 +160,6 @@ void PLAY_SONG(char *SOUND_FILE_PATH) {
                 }
             }
             FMOD_Channel_IsPlaying(channel, &isPlaying);
-
-            //TODO RETURN A VALUE FOR WHETHER OR NOT "-stop" WAS USED
-            //IF NOT USED RID OF SCANF OR DUPE INPUT
         }
 
         err = FMOD_Sound_Release(sound);
