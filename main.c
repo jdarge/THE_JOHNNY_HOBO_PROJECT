@@ -44,7 +44,6 @@ int main(void) {
 
     strcpy(direc, def);
     while (1) {
-        //scanf("%s",input); //     DOUBLE INPUT WILL FIX BAD INPUTS
         scanf("%s", input);
         if (strcmp(input, "-help") == 0) {
             printf(
@@ -160,12 +159,14 @@ void PLAY_SONG(char *SOUND_FILE_PATH) {
         FMOD_CHANNEL *channel;
         FMOD_System_PlaySound(system, sound, 0, 0, &channel);
 
-        scanf("%s", temp);
+
         FMOD_BOOL isPlaying = 1;
         while (isPlaying) {
-            if (strcmp(temp, "-stop") == 0) {//while((x=getchar()!='\n')&& x != EOF);
-                while ((x = getchar() != '\n') && x != EOF); // NOLINT(cppcoreguidelines-narrowing-conversions)
-                break;
+            if (scanf("%s", temp)) {//while((x=getchar()!='\n')&& x != EOF);
+                if(strcmp(temp,"-stop") == 0) {
+                    while ((x = getchar() != '\n') && x != EOF); // NOLINT(cppcoreguidelines-narrowing-conversions)
+                    break;
+                }
             }
             FMOD_Channel_IsPlaying(channel, &isPlaying);
 
