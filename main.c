@@ -11,25 +11,46 @@
 
 //FUNCTIONS
 char *direcGen();
+char* newDirec(char* direc, char* input);
 char* SONG_DIREC(char* direc, char* song_name);
 char *strremove(char *str, char *sub);
 void PLAY_SONG(char *SOUND_FILE_PATH);
+char* REMOVE_SONG(char *direc, char* song);
 
 int main(void) {//TODO STOP PROGRAM FROM CLOSING AT END OF SONG
 
     //INITIALIZING VARIABLES
-    char* direc = direcGen();
-    char *song_name = (char *) malloc(sizeof(char) * 100);
+    char x[1] = {'/'};
+    char* def = direcGen();
+    char* direc = (char*)malloc(sizeof(char) * (strlen(def) + 1));
+    char *input = (char *) malloc(sizeof(char) * 100);
 
-    //GETTING SONG NAME
-    printf("Enter song file name:");
-    scanf("%s", song_name);
-
-    //REFORMATS DIREC TO INCLUDE THE SONG
-    direc = SONG_DIREC(direc, song_name);
-
-    //
-    PLAY_SONG(direc);
+    strcpy(direc, def);
+    while(1){
+        //waiting for command
+        scanf("%s", input);
+        if(strcmp(input,"-direc") == 0){
+            scanf("%s", input);
+            if(strcmp(input,"-default") == 0){
+                printf("DEFAULT: %s\n",def);
+                direc = strcpy(direc,def);
+            } else {
+                strcat(input, x);
+                direc = newDirec(direc, input);
+                printf("%llu %s\n", strlen(direc), direc);
+            }
+        } else if(strcmp(input,"-play") == 0){
+            scanf("%s",input);
+            direc = SONG_DIREC(direc, input);
+            PLAY_SONG(direc);
+            direc = REMOVE_SONG(direc, input);
+            //printf("%s\n",direc);
+        } else if(strcmp(input,"-exit") == 0){
+            break;
+        } else {
+            printf("\nCOMMAND NOT UNDERSTOOD...\n");
+        } while ((getchar()) != '\n');
+    }
 }
 
 char* direcGen(){
@@ -38,8 +59,26 @@ char* direcGen(){
 
     //GETTING AND STORING CURRENT WORKING DIRECTORY
     strcpy(direc, getcwd(direc, MAX_BUF));
-    strcpy(direc, strremove(direc, "\\cmake-build-debug"));
+    strcpy(direc, strremove(direc, "\\cmake-build-debug-mingw"));// debug purposes only
     strcat(direc, "\\music_files\\");
+
+    unsigned long long length = 1 + strlen(direc);
+
+    for (int i = 0; i < length; i++)
+        if (direc[i] == '\\') direc[i] = '/';
+
+    return direc;
+}
+
+char* newDirec(char* direc, char* input){
+    strcpy(direc, input);
+    realloc(direc,sizeof(char) * (strlen(input) + 2));
+
+    unsigned long long length = 2 + strlen(input);
+
+    for (int i = 0; i < length - 1; i++){
+        if (direc[i] == '\\') direc[i] = '/';
+    }
 
     return direc;
 }
@@ -58,6 +97,53 @@ char* SONG_DIREC(char* direc, char* song_name) {
     return direc;
 }
 
+char* REMOVE_SONG(char *direc, char* song){
+    strremove(direc,song);
+    return direc;
+}
+
+void PLAY_SONG(char *SOUND_FILE_PATH) {
+    while(1) {
+        char temp[6];
+        char x;
+
+
+        FMOD_SYSTEM *system;
+
+        FMOD_RESULT err = FMOD_System_Create(&system);
+        if (err != 0) break;
+
+        err = FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, 0);
+        if (err != 0) break;
+
+        FMOD_SOUND *sound;
+        err = FMOD_System_CreateSound(system, SOUND_FILE_PATH, FMOD_HARDWARE, 0, &sound);
+        if (err != 0) break;
+        //SONG BEGINS PLAYING HERE
+        FMOD_CHANNEL *channel;
+        FMOD_System_PlaySound(system, sound, 0, 0, &channel);
+
+        FMOD_BOOL isPlaying = 1;
+        while (isPlaying){
+            scanf("%s",temp);
+            if(strcmp(temp,"-stop") == 0){//while((x=getchar()!='\n')&& x != EOF);
+                break;
+            } else {
+
+            }
+            FMOD_Channel_IsPlaying(channel, &isPlaying);
+        }
+
+        err = FMOD_Sound_Release(sound);
+        if (err != 0) break;
+        err = FMOD_System_Close(system);
+        if (err != 0) break;
+        err = FMOD_System_Release(system);
+        if (err != 0) break;
+        break;
+    }
+}
+
 char *strremove(char *str, char *sub) {
     char *p, *q, *r;
     if ((q = r = strstr(str, sub)) != NULL) {
@@ -70,31 +156,4 @@ char *strremove(char *str, char *sub) {
             continue;
     }
     return str;
-}
-
-void PLAY_SONG(char *SOUND_FILE_PATH) {char temp[50];
-    FMOD_SYSTEM *system;
-
-    FMOD_RESULT err = FMOD_System_Create(&system);
-    if (err != 0) exit(err);
-
-    err = FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, 0);
-    if (err != 0) exit(err);
-
-    FMOD_SOUND *sound;
-    err = FMOD_System_CreateSound(system, SOUND_FILE_PATH, FMOD_HARDWARE, 0, &sound);
-    if (err != 0) exit(err);
-    //SONG BEGINS PLAYING HERE
-    FMOD_CHANNEL *channel;
-    FMOD_System_PlaySound(system, sound, 0, 0, &channel);
-
-    FMOD_BOOL isPlaying = 1;
-    while (isPlaying) FMOD_Channel_IsPlaying(channel, &isPlaying);
-
-    err = FMOD_Sound_Release(sound);
-    if (err != 0) exit(err);
-    err = FMOD_System_Close(system);
-    if (err != 0) exit(err);
-    err = FMOD_System_Release(system);
-    if (err != 0) exit(err);
 }
