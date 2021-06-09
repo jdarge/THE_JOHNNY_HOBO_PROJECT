@@ -44,6 +44,7 @@ int main(void) {
 
     strcpy(direc, def);
     while (1) {
+        //scanf("%s",input); //     DOUBLE INPUT WILL FIX BAD INPUTS
         scanf("%s", input);
         if (strcmp(input, "-help") == 0) {
             printf(
@@ -56,7 +57,7 @@ int main(void) {
             scanf("%s", input);
             if (strcmp(input, "-loc") == 0) {
             } else if (strcmp(input, "-default") == 0) {
-                printf("DEFAULT: %s\n", def);
+                //printf("DEFAULT: %s\n", def);
                 direc = strcpy(direc, def);
             } else {
                 strcat(input, x);
@@ -74,7 +75,7 @@ int main(void) {
         } else {
             printf("\nCOMMAND NOT UNDERSTOOD...\n");
         }
-        while (getchar() != '\n');
+        //while (getchar() != '\n');
     }
 }
 
@@ -159,14 +160,17 @@ void PLAY_SONG(char *SOUND_FILE_PATH) {
         FMOD_CHANNEL *channel;
         FMOD_System_PlaySound(system, sound, 0, 0, &channel);
 
+        scanf("%s", temp);
         FMOD_BOOL isPlaying = 1;
         while (isPlaying) {
-            scanf("%s", temp);
             if (strcmp(temp, "-stop") == 0) {//while((x=getchar()!='\n')&& x != EOF);
                 while ((x = getchar() != '\n') && x != EOF); // NOLINT(cppcoreguidelines-narrowing-conversions)
                 break;
             }
             FMOD_Channel_IsPlaying(channel, &isPlaying);
+
+            //TODO RETURN A VALUE FOR WHETHER OR NOT "-stop" WAS USED
+            //IF NOT USED RID OF SCANF OR DUPE INPUT
         }
 
         err = FMOD_Sound_Release(sound);
