@@ -1,3 +1,12 @@
+/*
+ *
+ * KNOWN BUGS:
+ *      crashing after swapping between different commands
+ *      needing to repeat "-play <SONG>" if you let the song playout w/ doing -stop
+ *      ...
+ *
+ * */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
