@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod.h
+fmod_common.h
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_common.h
+
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_codec.h
+
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_common.h
+fmod_codec.h
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_codec.h
+fmod_dsp.h
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_dsp.h
+
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod_dsp.h
+
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+unistd.h
+-
+raylib.h
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/raylib.h
+fmod/api/lowlevel/inc/fmod.h
+C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod.h
+
+libs/raylib/src/raylib.h
+stdarg.h
+-
+stdbool.h
+-
+

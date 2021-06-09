@@ -1,0 +1,64 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe cmTC_be660/fast && C:/PROGRA~1/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_be660.dir\build.make CMakeFiles/cmTC_be660.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_be660.dir/src.c.obj
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD  -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -o CMakeFiles\cmTC_be660.dir\src.c.obj -c C:\Users\jdarg\Documents\THE_JOHNNY_HOBO_PROJECT\music_player\cmake-build-debug\CMakeFiles\CMakeTmp\src.c
+Linking C executable cmTC_be660.exe
+"C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_be660.dir\link.txt --verbose=1
+"C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_be660.dir/objects.a
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\cmTC_be660.dir/objects.a @CMakeFiles\cmTC_be660.dir\objects1.rsp
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\gcc.exe -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -Wl,--whole-archive CMakeFiles\cmTC_be660.dir/objects.a -Wl,--no-whole-archive -o cmTC_be660.exe -Wl,--out-implib,libcmTC_be660.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_be660.dir\linklibs.rsp
+CMakeFiles\cmTC_be660.dir/objects.a(src.c.obj):src.c:(.text+0x35): undefined reference to `pthread_create'
+CMakeFiles\cmTC_be660.dir/objects.a(src.c.obj):src.c:(.text+0x41): undefined reference to `pthread_detach'
+CMakeFiles\cmTC_be660.dir/objects.a(src.c.obj):src.c:(.text+0x4d): undefined reference to `pthread_cancel'
+CMakeFiles\cmTC_be660.dir/objects.a(src.c.obj):src.c:(.text+0x5e): undefined reference to `pthread_join'
+CMakeFiles\cmTC_be660.dir/objects.a(src.c.obj):src.c:(.text+0x68): undefined reference to `pthread_exit'
+collect2.exe: error: ld returned 1 exit status
+mingw32-make.exe[1]: *** [CMakeFiles\cmTC_be660.dir\build.make:107: cmTC_be660.exe] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [Makefile:139: cmTC_be660/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/PROGRA~1/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe cmTC_225ab/fast && C:/PROGRA~1/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe  -f CMakeFiles\cmTC_225ab.dir\build.make CMakeFiles/cmTC_225ab.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_225ab.dir/CheckFunctionExists.c.obj
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\gcc.exe   -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles\cmTC_225ab.dir\CheckFunctionExists.c.obj -c "C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\share\cmake-3.19\Modules\CheckFunctionExists.c"
+Linking C executable cmTC_225ab.exe
+"C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E cmake_link_script CMakeFiles\cmTC_225ab.dir\link.txt --verbose=1
+"C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\cmTC_225ab.dir/objects.a
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\ar.exe cr CMakeFiles\cmTC_225ab.dir/objects.a @CMakeFiles\cmTC_225ab.dir\objects1.rsp
+C:\PROGRA~1\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin\gcc.exe -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,--whole-archive CMakeFiles\cmTC_225ab.dir/objects.a -Wl,--no-whole-archive -o cmTC_225ab.exe -Wl,--out-implib,libcmTC_225ab.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_225ab.dir\linklibs.rsp
+C:/PROGRA~1/mingw-w64/x86_64-8.1.0-win32-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot find -lpthreads
+collect2.exe: error: ld returned 1 exit status
+mingw32-make.exe[1]: *** [CMakeFiles\cmTC_225ab.dir\build.make:107: cmTC_225ab.exe] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/cmake-build-debug/CMakeFiles/CMakeTmp'
+mingw32-make.exe: *** [Makefile:139: cmTC_225ab/fast] Error 2
+
+
+
