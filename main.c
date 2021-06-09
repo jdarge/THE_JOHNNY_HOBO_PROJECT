@@ -32,8 +32,14 @@ int main(void) {
     strcpy(direc, def);
     while(1){
         scanf("%s", input);
-        if(strcmp(input,"-direc") == 0){
-            //printf("\nPRE: %s",direc);
+        if(strcmp(input, "-help") == 0){
+            printf(
+                    "DIRECTORY OPTIONS:\n    -direc\n\t-loc\n\t-default\n\t<PATH>\n\n"
+                   "PLAY OPTIONS:\n    -play <SONG.mp3> [MUST INCLUDE .mp3]\n\n"
+                   "EXIT:\n    -exit\n"
+                   "\n------------------------------------------------------------------------------------------------------------------------\n"
+            );
+        } else if(strcmp(input,"-direc") == 0){
             scanf("%s", input);
             if(strcmp(input, "-loc") == 0){
             } else if(strcmp(input,"-default") == 0){

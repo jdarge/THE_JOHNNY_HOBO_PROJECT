@@ -6,5 +6,4 @@ CMakeFiles/music_player.dir/main.c.obj: ../fmod/api/lowlevel/inc/fmod_codec.h
 CMakeFiles/music_player.dir/main.c.obj: ../fmod/api/lowlevel/inc/fmod_common.h
 CMakeFiles/music_player.dir/main.c.obj: ../fmod/api/lowlevel/inc/fmod_dsp.h
 CMakeFiles/music_player.dir/main.c.obj: ../main.c
-CMakeFiles/music_player.dir/main.c.obj: libs/raylib/src/raylib.h
 

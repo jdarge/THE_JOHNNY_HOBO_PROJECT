@@ -31,14 +31,6 @@ math.h
 -
 unistd.h
 -
-raylib.h
-C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/raylib.h
 fmod/api/lowlevel/inc/fmod.h
 C:/Users/jdarg/Documents/THE_JOHNNY_HOBO_PROJECT/music_player/fmod/api/lowlevel/inc/fmod.h
-
-libs/raylib/src/raylib.h
-stdarg.h
--
-stdbool.h
--
 
