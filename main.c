@@ -1,3 +1,5 @@
+//HOW DO I PUSH FROM A SECOND LOCAL BRANCH TO A REMOTE SECOND BRANCH
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +8,6 @@
 
 //INTERNAL LIBS
 #include "fmod/api/lowlevel/inc/fmod.h"
-//#include "raylib.h"
 
 //FUNCTIONS
 char *direcGen();
@@ -71,7 +72,7 @@ char *strremove(char *str, char *sub) {
     return str;
 }
 
-void PLAY_SONG(char *SOUND_FILE_PATH) {
+void PLAY_SONG(char *SOUND_FILE_PATH) {char temp[50];
     FMOD_SYSTEM *system;
 
     FMOD_RESULT err = FMOD_System_Create(&system);
@@ -83,7 +84,7 @@ void PLAY_SONG(char *SOUND_FILE_PATH) {
     FMOD_SOUND *sound;
     err = FMOD_System_CreateSound(system, SOUND_FILE_PATH, FMOD_HARDWARE, 0, &sound);
     if (err != 0) exit(err);
-
+    //SONG BEGINS PLAYING HERE
     FMOD_CHANNEL *channel;
     FMOD_System_PlaySound(system, sound, 0, 0, &channel);
 
