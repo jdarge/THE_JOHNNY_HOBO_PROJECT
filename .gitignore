@@ -1,3 +1,4 @@
 # Project exclude paths
 /temp/
 /cmake-build-debug-mingw/
+/cmake-build-debug/
