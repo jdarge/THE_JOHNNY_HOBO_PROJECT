@@ -35,6 +35,7 @@ int main(void) {
     char *input = (char *) malloc(sizeof(char) * 100);
 
     strcpy(direc, def);
+    printf("\nCURRENT WORKING DIRECTORY: %s\n\n", direc);
     while (1) {
         if (flag < 0);
         else scanf("%s", input);
@@ -139,7 +140,7 @@ char *direcGen() {
 
     //GETTING AND STORING CURRENT WORKING DIRECTORY
     strcpy(direc, getcwd(direc, MAX_BUF));
-    strcpy(direc, strremove(direc, "\\cmake-build-debug"));// debug purposes only
+    strcpy(direc, strremove(direc, "\\cmake-build-debug-mingw"));// debug purposes only
     strcat(direc, "\\music_files\\");
 
     unsigned long long length = 1 + strlen(direc);
