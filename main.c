@@ -60,81 +60,31 @@ int main(void) {
             direc = SONG_DIREC(direc, input);
             PLAY_SONG(direc);
             direc = REMOVE_SONG(direc, input);
+            //TODO READD -stop FEATURE
         } else if (strcmp(input, "-exit") == 0) {
             break;
         } else {
             printf("\nCOMMAND NOT UNDERSTOOD...\n");
         }
-        //while (getchar() != '\n');
     }
-}
-
-//-------UTILITY--------------------------------------------------------------------------------------------------------
-char *direcGen() {
-    int MAX_BUF = 200;
-    char *direc = (char *) malloc(sizeof(char) * MAX_BUF);
-
-    //GETTING AND STORING CURRENT WORKING DIRECTORY
-    strcpy(direc, getcwd(direc, MAX_BUF));
-    strcpy(direc, strremove(direc, "\\cmake-build-debug"));// debug purposes only
-    strcat(direc, "\\music_files\\");
-
-    unsigned long long length = 1 + strlen(direc);
-
-    for (int i = 0; i < length; i++)
-        if (direc[i] == '\\') direc[i] = '/';
-
-    return direc;
-}
-
-char *newDirec(char *direc, char *input) {
-    strcpy(direc, input);
-    realloc(direc, sizeof(char) * strlen(input) + 1);
-
-    unsigned long long length = 2 + strlen(input);
-
-    for (int i = 0; i < length - 1; i++) {
-        if (direc[i] == '\\') direc[i] = '/';
-    }
-
-    return direc;
-}
-
-char *strremove(char *str, char *sub) {
-    char *p, *q, *r;
-    if ((q = r = strstr(str, sub)) != NULL) {
-        size_t len = strlen(sub);
-        while ((r = strstr(p = r + len, sub)) != NULL) {
-            while (p < r)
-                *q++ = *p++;
-        }
-        while ((*q++ = *p++) != '\0')
-            continue;
-    }
-    return str;
 }
 
 //-------SONG-----------------------------------------------------------------------------------------------------------
-
 char *SONG_DIREC(char *direc, char *song_name) {
-    //LENGTH OF direc
-    unsigned long long length = 1 + strlen(direc);
-
     //REFORMATTING SONG DIRECTORY
     strcat(direc, song_name);//<-----
 
     // replaces '\' w/ '/' for FMOD to work properly
-    for (int i = 0; i < length; i++)
+    unsigned long long length = 1 + strlen(direc);
+    for (int i = 0; i < length; i++) {
         if (direc[i] == '\\') direc[i] = '/';
+    }
 
     return direc;
 }
 
 void PLAY_SONG(char *SOUND_FILE_PATH) {
     while (1) {
-        char temp[6];
-        char x;
-
         FMOD_SYSTEM *system;
 
         FMOD_RESULT err = FMOD_System_Create(&system);
@@ -150,17 +100,8 @@ void PLAY_SONG(char *SOUND_FILE_PATH) {
         FMOD_CHANNEL *channel;
         FMOD_System_PlaySound(system, sound, 0, 0, &channel);
 
-
         FMOD_BOOL isPlaying = 1;
-        while (isPlaying) {
-            if (scanf("%s", temp)) {//while((x=getchar()!='\n')&& x != EOF);
-                if(strcmp(temp,"-stop") == 0) {
-                    while ((x = getchar() != '\n') && x != EOF); // NOLINT(cppcoreguidelines-narrowing-conversions)
-                    break;
-                }
-            }
-            FMOD_Channel_IsPlaying(channel, &isPlaying);
-        }
+        while (isPlaying) FMOD_Channel_IsPlaying(channel, &isPlaying);
 
         err = FMOD_Sound_Release(sound);
         if (err != 0) break;
@@ -181,3 +122,46 @@ char *REMOVE_SONG(char *direc, char *song) {
 
 
 
+
+//-------UTILITY--------------------------------------------------------------------------------------------------------
+char *direcGen() {
+    int MAX_BUF = 200;
+    char *direc = (char *) malloc(sizeof(char) * MAX_BUF);
+
+    //GETTING AND STORING CURRENT WORKING DIRECTORY
+    strcpy(direc, getcwd(direc, MAX_BUF));
+    strcpy(direc, strremove(direc, "\\cmake-build-debug"));// debug purposes only
+    strcat(direc, "\\music_files\\");
+
+    unsigned long long length = 1 + strlen(direc);
+    for (int i = 0; i < length; i++)
+        if (direc[i] == '\\') direc[i] = '/';
+
+    return direc;
+}
+
+char *newDirec(char *direc, char *input) {
+    strcpy(direc, input);
+    realloc(direc, sizeof(char) * strlen(input) + 1);
+
+    unsigned long long length = 2 + strlen(input);
+    for (int i = 0; i < length - 1; i++) {
+        if (direc[i] == '\\') direc[i] = '/';
+    }
+
+    return direc;
+}
+
+char *strremove(char *str, char *sub) {
+    char *p, *q, *r;
+
+    if ((q = r = strstr(str, sub)) != NULL) {
+        size_t len = strlen(sub);
+        while ((r = strstr(p = r + len, sub)) != NULL) {
+            while (p < r) *q++ = *p++;
+        }
+        while ((*q++ = *p++) != '\0');
+    }
+
+    return str;
+}
